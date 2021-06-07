@@ -1,0 +1,22 @@
+@import "../_variables.scss";
+
+.scrollTop{
+    position: fixed;
+    border-radius: 4px;
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+    background-color: $color-primary;
+    right: 2em;
+    bottom: 4em;
+    color: $color-light;
+    text-decoration: none;
+    &:after{
+        content: "\f062";
+        font-size: 2em;
+        font-family: FontAwesome;
+    }
+    &:hover{
+        background-color: $color-dark;
+    }
+}

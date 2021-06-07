@@ -1,0 +1,66 @@
+<div class="container main-content">
+    <h1>Rail Ticket Results</h1>
+    <div class="row justify-content-end">
+        <div class="col-md-3">           
+            <div class="dropdown mb-3">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{selectedValue}}
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <li *ngFor = "let sort of ticketSorts" (click) = "sortSelected(sort);"  value="{{sort.sortText}}"  class="dropdown-item" >
+                        {{sort.sortText}}
+                    </li>
+                </ul>
+            </div>  
+        </div>
+    </div>
+    <div class="border border-secondary shadow mb-4" *ngFor= "let ticket of tickets">
+        <div class="card-body">
+            <div class="row">
+                <dl class=" col-4">
+                    <dt>Arrival Date: </dt>
+                    <dd> {{ticket.ArrDate | dateFormat}} </dd>
+                    <dt>Departure Date: </dt>
+                    <dd> {{ticket.DepDate | dateFormat}} </dd>
+                </dl>
+                <dl class="col-4">
+                    <dt>Arrival Station: </dt>
+                    <dd> {{ticket.ArrStationCodeFull}} </dd>
+                    <dt>Departure Station: </dt>
+                    <dd> {{ticket.DepStationCodeFull}} </dd>
+                </dl>
+                <dl class="col-4">
+                    <dt>Total time: </dt>
+                    <dd>{{ticket.totalTime | totalTimeFormat}}</dd>
+                    <dt>Total distance: </dt>
+                    <dd>{{ticket.DistanceTravelled}} mi</dd>
+                </dl>
+            </div>
+            <div *ngFor= "let des of ticket.Legs" class="table-responsive">        
+                <table class="table">                                    
+                    <thead>
+                        <tr>
+                            <th>Depature Station</th>
+                            <th>Arrival Station</th>
+                            <th>Departure Time</th>
+                            <th>Arrival Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>    
+                        <tr>
+                            <td>{{des.DepStnFull}}</td>
+                            <td>{{des.ArrStnFull}}</td>
+                            <td>{{des.DepTime | timeFormat}}</td>
+                            <td>{{des.ArrTime | timeFormat}}</td>
+                        </tr>     
+                    </tbody>     
+                </table>   
+                <div class="d-flex mb-4 flex-row tdPriceDescription">
+                    <span *ngFor= "let dest of des.TKTs" class="btn btn-info">
+                        &pound;{{dest.AdtPrice}}<br>{{dest.TicketDescription}}                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
